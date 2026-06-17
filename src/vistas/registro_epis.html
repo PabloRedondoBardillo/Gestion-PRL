@@ -1,0 +1,59 @@
+<div class="view-header">
+    <p>Registro de entregas de equipos de protección a los trabajadores y control de caducidades.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-epi" class="btn btn--primary">+ Registrar Entrega de EPI</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="20%">Trabajador</th>
+                <th width="20%">EPI Entregado</th>
+                <th width="20%">Marca y Modelo</th>
+                <th width="12%">Fecha Entrega</th>
+                <th width="13%">Fecha Caducidad</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-epis-entregados"></tbody>
+    </table>
+</div>
+
+<div id="modal-epi" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Registro de Entrega</h2>
+            <button id="btn-cerrar-epi" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-epi">
+                <input type="hidden" id="form-epi-id">
+                <div class="form-group form-group--full">
+                    <label class="form-label">Trabajador Receptor *</label>
+                    <select id="form-epi-trabajador" class="form-control" required></select>
+                </div>
+                <div class="form-group form-group--full">
+                    <label class="form-label">Tipo de Equipo *</label>
+                    <select id="form-epi-tipo" class="form-control" required></select>
+                </div>
+                <div class="form-group form-group--full">
+                    <label class="form-label">Marca y Modelo</label>
+                    <input type="text" id="form-epi-marca" class="form-control" placeholder="Ej: 3M Peltor Optime">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Entrega *</label>
+                    <input type="date" id="form-epi-fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Caducidad</label>
+                    <input type="date" id="form-epi-caducidad" class="form-control">
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-epi" class="btn btn--primary">Guardar Registro</button>
+        </div>
+    </div>
+</div>

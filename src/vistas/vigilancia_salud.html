@@ -1,0 +1,87 @@
+<div class="view-header">
+    <p>Control de reconocimientos médicos, estados de aptitud y próximas revisiones.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-examen" class="btn btn--primary">+ Registrar Control Médico</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="25%">Trabajador</th>
+                <th width="15%">Fecha Examen</th>
+                <th width="15%">Tipo Evaluación</th>
+                <th width="15%">Resultado / Aptitud</th>
+                <th width="15%">Próxima Revisión</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-vigilancia"></tbody>
+    </table>
+</div>
+
+<div id="modal-vigilancia" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Registro de Control Médico</h2>
+            <button id="btn-cerrar-vigilancia" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-vigilancia">
+                <input type="hidden" id="form-vigilancia-id">
+                
+                <div class="form-group form-group--full">
+                    <label class="form-label">Trabajador *</label>
+                    <select id="form-vigilancia-trabajador" class="form-control" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fecha del Examen *</label>
+                    <input type="date" id="form-vigilancia-fecha" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tipo de Examen *</label>
+                    <select id="form-vigilancia-tipo" class="form-control" required>
+                        <option value="Inicial">Inicial (Ingreso)</option>
+                        <option value="Periódico">Periódico Anual</option>
+                        <option value="Tras baja prolongada">Tras baja prolongada</option>
+                        <option value="Por cambio de puesto">Por cambio de puesto</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Resultado Detallado *</label>
+                    <select id="form-vigilancia-resultado" class="form-control" required>
+                        <option value="Apto">Apto</option>
+                        <option value="Apto con restricciones">Apto con restricciones</option>
+                        <option value="No apto temporal">No apto temporal</option>
+                        <option value="No apto">No apto definitivo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">¿Es Apto para trabajar? *</label>
+                    <select id="form-vigilancia-apto" class="form-control" required>
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Próxima Revisión</label>
+                    <input type="date" id="form-vigilancia-proxima" class="form-control">
+                </div>
+
+                <div class="form-group form-group--full">
+                    <label class="form-label">Observaciones o Restricciones</label>
+                    <textarea id="form-vigilancia-observaciones" class="form-control" rows="3" placeholder="Especificar restricciones si las hay..."></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-vigilancia" class="btn btn--primary">Guardar Control</button>
+        </div>
+    </div>
+</div>

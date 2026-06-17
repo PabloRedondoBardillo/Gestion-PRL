@@ -1,0 +1,73 @@
+<div class="view-header">
+    <p>Planificación y registro de mantenimientos preventivos y correctivos de maquinaria.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-mantenimiento" class="btn btn--primary">+ Programar Mantenimiento</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="20%">Equipo</th>
+                <th width="15%">Tipo</th>
+                <th width="15%">Programado</th>
+                <th width="15%">Realizado</th>
+                <th width="20%">Responsable</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-mantenimientos"></tbody>
+    </table>
+</div>
+
+<div id="modal-mantenimiento" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Orden de Mantenimiento</h2>
+            <button id="btn-cerrar-mantenimiento" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-mantenimiento">
+                <input type="hidden" id="form-mant-id">
+                
+                <div class="form-group form-group--full">
+                    <label class="form-label">Equipo a revisar *</label>
+                    <select id="form-mant-equipo" class="form-control" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tipo de Intervención *</label>
+                    <select id="form-mant-tipo" class="form-control" required>
+                        <option value="preventivo">Preventivo (Revisión)</option>
+                        <option value="correctivo">Correctivo (Avería)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Persona Responsable *</label>
+                    <select id="form-mant-responsable" class="form-control" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fecha Programada *</label>
+                    <input type="date" id="form-mant-prog" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fecha Realizada (Cierre)</label>
+                    <input type="date" id="form-mant-real" class="form-control">
+                    <small style="color:#666;">Déjalo en blanco si aún está pendiente.</small>
+                </div>
+
+                <div class="form-group form-group--full">
+                    <label class="form-label">Observaciones / Trabajos realizados</label>
+                    <textarea id="form-mant-obs" class="form-control" rows="2"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-mantenimiento" class="btn btn--primary">Guardar Orden</button>
+        </div>
+    </div>
+</div>

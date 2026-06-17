@@ -1,0 +1,49 @@
+<div class="view-header">
+    <p>Catálogo global de Equipos de Protección Individual homologados.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-tipo-epi" class="btn btn--secondary">+ Añadir EPI al Catálogo</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="25%">Nombre del Equipo</th>
+                <th width="20%">Normativa (EN/ISO)</th>
+                <th width="35%">Descripción</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-tipos-epi"></tbody>
+    </table>
+</div>
+
+<div id="modal-tipo-epi" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>EPI del Catálogo</h2>
+            <button id="btn-cerrar-tipo-epi" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-tipo-epi">
+                <input type="hidden" id="form-tipo-epi-id">
+                <div class="form-group">
+                    <label class="form-label">Nombre del Equipo *</label>
+                    <input type="text" id="form-tipo-epi-nombre" class="form-control" required placeholder="Ej: Casco dieléctrico">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Normativa / Marcado CE</label>
+                    <input type="text" id="form-tipo-epi-normativa" class="form-control" placeholder="Ej: EN 397">
+                </div>
+                <div class="form-group form-group--full">
+                    <label class="form-label">Descripción</label>
+                    <textarea id="form-tipo-epi-descripcion" class="form-control" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-tipo-epi" class="btn btn--primary">Guardar EPI</button>
+        </div>
+    </div>
+</div>

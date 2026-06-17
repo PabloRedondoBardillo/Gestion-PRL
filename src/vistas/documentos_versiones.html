@@ -1,0 +1,66 @@
+<div class="view-header">
+    <p>Historial de revisiones, modificaciones y aprobaciones de los documentos.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nueva-version" class="btn btn--primary">+ Registrar Nueva Versión</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="25%">Documento</th>
+                <th width="10%">Versión</th>
+                <th width="12%">Fecha</th>
+                <th width="23%">Resumen de Cambios</th>
+                <th width="15%">Aprobado Por</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-versiones"></tbody>
+    </table>
+</div>
+
+<div id="modal-version" class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <h2>Actualización de Versión</h2>
+            <button id="btn-cerrar-version" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-version">
+                <input type="hidden" id="form-ver-id">
+                
+                <div class="form-grid">
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Documento Maestro *</label>
+                        <select id="form-ver-documento" class="form-control" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Nueva Versión (Ej: 1.2, 2.0) *</label>
+                        <input type="text" id="form-ver-numero" class="form-control" required placeholder="1.0">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Revisión *</label>
+                        <input type="date" id="form-ver-fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Descripción de los Cambios *</label>
+                        <textarea id="form-ver-cambios" class="form-control" rows="2" required placeholder="Motivo de la actualización y puntos modificados..."></textarea>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Aprobado Por</label>
+                        <select id="form-ver-aprobado" class="form-control"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-version" class="btn btn--primary">Guardar Versión</button>
+        </div>
+    </div>
+</div>

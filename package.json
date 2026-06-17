@@ -1,0 +1,34 @@
+{
+  "name": "gestion-prl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "author": "Pablo <pabloredondob@gmail.com>",
+  "homepage": "https://github.com/PabloRedondoBardillo/gestion-prl",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.1.2" 
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "linux": {
+      "target": ["AppImage"],
+      "category": "Utility",
+      "icon": "build/icon.png"
+    }
+  },
+  "keywords": [],
+  "license": "ISC",
+  "type": "commonjs"  
+}

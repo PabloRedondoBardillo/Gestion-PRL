@@ -1,0 +1,43 @@
+<div class="view-header">
+    <p>Gestiona las diferentes áreas, departamentos o zonas de la empresa activa.</p>
+    <button id="btn-nueva-seccion" class="btn btn--primary">+ Nueva Sección</button>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="80%">Nombre de la Sección</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-secciones"> 
+            </tbody>
+    </table>
+</div>
+
+<div id="modal-nueva-seccion" class="modal">
+    <div class="modal__content modal__content--small">
+        
+        <div class="modal__header">
+            <h2>Alta de Nueva Sección</h2>
+            <button id="btn-cerrar-modal-seccion" class="btn--icon">&times;</button>
+        </div>
+        
+        <div class="modal__body">
+            <form id="form-seccion">
+                <input type="hidden" id="form-seccion-id">
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Sección *</label>
+                    <input type="text" id="form-seccion-nombre" class="form-control" required placeholder="Ej: Producción, Almacén, Oficinas...">
+                </div>
+            </form>
+        </div>
+        
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-seccion" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-seccion" class="btn btn--primary">Guardar Sección</button>
+        </div>
+
+    </div>
+</div>

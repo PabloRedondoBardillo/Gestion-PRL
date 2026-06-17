@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Integral de PRL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Gestión PRL</h2>
+                <h4 id="empresa">Empresa ▾</h4>
+                <p id="nombre-empresa">Seleccione Empresa</p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="inicio">Inicio</li>
+                <li data-target="secciones">Secciones</li>
+                <li data-target="puestos">Puestos de Trabajo</li>
+                <li data-target="personas">Gestion de Personas</li>
+                <li data-target="trabajadores">Trabajadores</li>
+                <li data-target="vigilancia_salud">Vigilancia de la Salud</li>
+                <li data-target="catalogo_cursos">Catálogo de Cursos</li>
+                <li data-target="registro_formacion">Registro de Formación</li>
+                <li data-target="riesgos">Evaluación de Riesgos</li>
+                <li data-target="planes">Planes de Prevencion</li>
+                <li data-target="catalogo_epis">Catálogo de Epis</li>
+                <li data-target="registro_epis">Registro de Epis</li>
+                <li data-target="investigaciones">Investigación de Daños</li>
+                <li data-target="equipos">Equipos</li>
+                <li data-target="mantenimientos">Mantenimiento</li>                    
+                <li data-target="emergencias">Emergencias</li>
+                <li data-target="condiciones_trabajo">Condiciones de Trabajo</li>
+                <li data-target="participacion_consultas">Participación</li>
+                <li data-target="documentos_catalogo">Catálogo de Documentos</li>
+                <li data-target="documentos_versiones">Versiones de Documentos</li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+          <header class="content-header">
+                <h1 id="titulo-cabecera">Inicio</h1>
+          </header>
+          <div id="contenedor-principal" class="view-container">
+             </div>
+        </main>
+    </div>
+
+    <div id="modal-empresa" class="modal">
+        <div class="modal__content modal__content--small">
+            
+            <div class="modal__header">
+                <h2>Gestión de Empresa</h2>
+                <button id="btn-cerrar-modal-empresa" class="btn--icon">&times;</button>
+            </div>
+            
+            <div class="modal__body">
+                <div class="form-group">
+                    <label class="form-label">Seleccionar Empresa Existente</label>
+                    <div class="form-row">
+                        <select id="select-empresa" class="form-control"></select>
+                        <button type="button" id="btn-seleccionar-empresa" class="btn btn--secondary">Cargar</button>
+                    </div>
+                </div>
+
+                <hr class="form-divider">
+
+                <form id="form-nueva-empresa">
+                    <h3 style="margin-bottom: 15px; color: #444;">O dar de alta una nueva:</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">CIF *</label>
+                            <input type="text" id="emp-cif" class="form-control" required placeholder="Ej: B12345678">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nombre *</label>
+                            <input type="text" id="emp-nombre" class="form-control" required placeholder="Ej: Industrias S.L.">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dirección</label>
+                            <input type="text" id="emp-direccion" class="form-control" placeholder="Calle, ciudad...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" id="emp-telefono" class="form-control" placeholder="Ej: 941 00 00 00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="emp-email" class="form-control" placeholder="correo@empresa.com">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal__footer">
+                <button type="button" id="btn-cancelar-empresa" class="btn btn--secondary">Cancelar</button>
+                <button type="submit" form="form-nueva-empresa" class="btn btn--primary">Crear y Seleccionar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

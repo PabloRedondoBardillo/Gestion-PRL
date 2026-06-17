@@ -1,0 +1,84 @@
+<div class="view-header">
+    <p>Gestiona la plantilla, altas, bajas y puestos de trabajo de la empresa activa.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-trabajador" class="btn btn--primary">+ Nuevo Trabajador</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Nombre</th>
+                <th width="10%">DNI</th>
+                <th width="15%">Puesto de Trabajo</th>
+                <th width="12%">Fecha Alta</th>
+                <th width="12%">Fecha Baja</th>
+                <th width="8%">Activo</th>
+                <th width="20%">Observaciones</th>
+                <th width="8%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-trabajadores"> 
+            </tbody>
+    </table>
+</div>
+
+<div id="modal-nuevo-trabajador" class="modal">
+    <div class="modal__content">
+        
+        <div class="modal__header">
+            <h2>Alta de Nuevo Trabajador</h2>
+            <button id="btn-cerrar-modal" class="btn--icon">&times;</button>
+        </div>
+        
+        <div class="modal__body">
+            <form id="form-trabajador">
+                <input type="hidden" id="form-id">
+                <div class="form-grid">
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Persona Vinculada *</label>
+                        <select id="form-persona-select" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo *</label>
+                        <input type="text" id="form-nombre" class="form-control" required placeholder="Ej: Ana García">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">DNI / NIE *</label>
+                        <input type="text" id="form-dni" class="form-control" required placeholder="12345678A">
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Puesto de Trabajo *</label>
+                        <select id="form-puesto" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Alta</label>
+                        <input type="date" id="form-fecha-alta" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Baja</label>
+                        <input type="date" id="form-fecha-baja" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Activo</label>
+                        <select id="form-activo" class="form-control">
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Observaciones médicas o de PRL</label>
+                        <textarea id="form-observaciones" class="form-control" rows="3" placeholder="Restricciones, notas..."></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-modal" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-trabajador" class="btn btn--primary">Guardar Trabajador</button>
+        </div>
+
+    </div>
+</div>

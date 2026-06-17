@@ -1,0 +1,54 @@
+<div class="view-header">
+    <p>Inventario de equipos, maquinaria e instalaciones de la empresa.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-equipo" class="btn btn--primary">+ Alta de Equipo</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Código</th>
+                <th width="30%">Nombre del Equipo</th>
+                <th width="20%">Ubicación</th>
+                <th width="15%">Fecha de Compra</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-equipos"></tbody>
+    </table>
+</div>
+
+<div id="modal-equipo" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Ficha de Equipo</h2>
+            <button id="btn-cerrar-equipo" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-equipo">
+                <input type="hidden" id="form-eq-id">
+                <div class="form-group">
+                    <label class="form-label">Código Identificativo *</label>
+                    <input type="text" id="form-eq-codigo" class="form-control" required placeholder="Ej: MAQ-001">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre / Descripción *</label>
+                    <input type="text" id="form-eq-nombre" class="form-control" required placeholder="Ej: Prensa Hidráulica">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ubicación / Taller</label>
+                    <input type="text" id="form-eq-ubicacion" class="form-control" placeholder="Ej: Nave 2 - Sector B">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Compra / Instalación</label>
+                    <input type="date" id="form-eq-fecha" class="form-control">
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-equipo" class="btn btn--primary">Guardar Equipo</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="view-header">
+    <p>Catálogo maestro de documentos, manuales y procedimientos de la empresa.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-documento" class="btn btn--primary">+ Alta de Documento</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Código</th>
+                <th width="45%">Nombre del Documento</th>
+                <th width="20%">Tipo</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-documentos"></tbody>
+    </table>
+</div>
+
+<div id="modal-documento" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Ficha de Documento Maestro</h2>
+            <button id="btn-cerrar-documento" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-documento">
+                <input type="hidden" id="form-doc-id">
+                <div class="form-group">
+                    <label class="form-label">Código Único *</label>
+                    <input type="text" id="form-doc-codigo" class="form-control" required placeholder="Ej: PR-SST-01">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre / Título *</label>
+                    <input type="text" id="form-doc-nombre" class="form-control" required placeholder="Ej: Plan de Emergencias">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Documento</label>
+                    <select id="form-doc-tipo" class="form-control">
+                        <option value="Procedimiento">Procedimiento</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Instrucción de Trabajo">Instrucción de Trabajo</option>
+                        <option value="Formato/Plantilla">Formato / Plantilla</option>
+                        <option value="Política">Política</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-documento" class="btn btn--primary">Guardar Documento</button>
+        </div>
+    </div>
+</div>

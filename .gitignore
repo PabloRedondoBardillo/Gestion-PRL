@@ -1,0 +1,10 @@
+node_modules/
+dist/
+linux-unpacked/
+
+*.db
+*.sqlite
+gestion_prl.db
+
+npm-debug.log
+.DS_Store

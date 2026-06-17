@@ -1,0 +1,94 @@
+<div class="view-header">
+    <p>Registro de reuniones del Comité de Seguridad, consultas a delegados y actas de participación.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nueva-consulta" class="btn btn--primary">+ Registrar Consulta / Acta</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Tipo Consulta</th>
+                <th width="10%">Fecha</th>
+                <th width="20%">Descripción</th>
+                <th width="20%">Acuerdos Alcanzados</th>
+                <th width="20%">Participantes / Convocados</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-consultas"></tbody>
+    </table>
+</div>
+
+<div id="modal-consulta" class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <h2>Acta de Participación y Consulta</h2>
+            <button id="btn-cerrar-consulta" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-consulta">
+                <input type="hidden" id="form-con-id">
+                <div class="form-grid">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Consulta *</label>
+                        <select id="form-con-tipo" class="form-control" required>
+                            <option value="Comité de Seguridad">Comité de Seguridad y Salud</option>
+                            <option value="Delegados de Prevención">Reunión Delegados de Prevención</option>
+                            <option value="Consulta Informativa">Consulta Directa (Trabajadores)</option>
+                            <option value="Informativa EPIs/Maquinaria">Consulta Nueva Maquinaria / EPIs</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Fecha de la Reunión *</label>
+                        <input type="date" id="form-con-fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Descripción / Puntos del Orden del Día *</label>
+                        <textarea id="form-con-descripcion" class="form-control" rows="2" required></textarea>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Acuerdos Adoptados</label>
+                        <textarea id="form-con-acuerdos" class="form-control" rows="2" placeholder="Redacta las conclusiones finales..."></textarea>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Personas Participantes (Convocados)</label>
+                        <select id="form-con-participantes" class="form-control" multiple size="5" style="height: auto;"></select>
+                        <small style="color: var(--primary); display: block; margin-top: 5px;">Usa <strong>Ctrl + Click</strong> para seleccionar múltiples personas globales.</small>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-consulta" class="btn btn--primary">Guardar Acta</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-con-add-participante" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Añadir Convocado de Urgencia</h2>
+            <button id="btn-cerrar-con-add-part" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-con-add-part">
+                <input type="hidden" id="form-con-add-part-id">
+                <div class="form-group">
+                    <label class="form-label">Selecciona la persona global</label>
+                    <select id="form-con-add-part-persona" class="form-control" required></select>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-con-add-part" class="btn btn--primary">Añadir al Acta</button>
+        </div>
+    </div>
+</div>

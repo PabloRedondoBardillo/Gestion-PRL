@@ -1,0 +1,71 @@
+<div class="view-header">
+    <p>Panel principal de control y resumen de la empresa activa.</p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <h3>Total Trabajadores</h3>
+        <p class="stat-value" id="stat-trabajadores">0</p>
+    </div>
+    <div class="stat-card">
+        <h3>Riesgos Críticos</h3>
+        <p class="stat-value" id="stat-riesgos">0</p>
+    </div>
+    <div class="stat-card stat-card--danger">
+        <h3>Investigaciones Abiertas</h3>
+        <p class="stat-value" id="stat-investigaciones">0</p>
+    </div>
+    <div class="stat-card stat-card--danger">
+        <h3>Formaciones Vencidas</h3>
+        <p class="stat-value" id="stat-formaciones">0</p>
+    </div>
+    <div class="stat-card stat-card--warning">
+        <h3>EPIs Vencidas</h3>
+        <p class="stat-value" id="stat-epis">0</p>
+    </div>
+</div>
+
+<div class="empresa-actions" style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+    <h3 style="margin-bottom: 15px;">Administración de Empresa</h3>
+    <div style="display: flex; gap: 15px;">
+        <button id="btn-editar-empresa" class="btn btn--secondary">Editar Datos</button>
+        <button id="btn-eliminar-empresa" class="btn btn--danger">Eliminar Empresa</button>
+    </div>
+</div>
+
+<div id="modal-editar-empresa" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Editar Datos de Empresa</h2>
+            <button id="btn-cerrar-editar-empresa" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-editar-empresa">
+                <div class="form-group">
+                    <label class="form-label">CIF / NIF *</label>
+                    <input type="text" id="edit-emp-cif" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre o Razón Social *</label>
+                    <input type="text" id="edit-emp-nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" id="edit-emp-direccion" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" id="edit-emp-telefono" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="edit-emp-email" class="form-control">
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-editar-empresa" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-editar-empresa" class="btn btn--primary">Guardar Cambios</button>
+        </div>
+    </div>
+</div>

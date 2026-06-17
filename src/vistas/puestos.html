@@ -1,0 +1,65 @@
+<div class="view-header">
+    <p>Gestiona los puestos de trabajo, asignándolos a sus secciones y definiendo sus riesgos.</p>
+    <button id="btn-nuevo-puesto" class="btn btn--primary">+ Nuevo Puesto</button>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="20%">Puesto</th>
+                <th width="20%">Sección</th>
+                <th width="25%">Descripción de Tareas</th>
+                <th width="25%">Riesgos Asociados</th>
+                <th width="10%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-puestos"> 
+            </tbody>
+    </table>
+</div>
+
+<div id="modal-nuevo-puesto" class="modal">
+    <div class="modal__content">
+        
+        <div class="modal__header">
+            <h2>Gestión de Puesto de Trabajo</h2>
+            <button id="btn-cerrar-modal-puesto" class="btn--icon">&times;</button>
+        </div>
+        
+        <div class="modal__body">
+            <form id="form-puesto">
+                <input type="hidden" id="form-puesto-id">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Sección a la que pertenece *</label>
+                        <select id="form-puesto-seccion" class="form-control" required>
+                            </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Puesto *</label>
+                        <input type="text" id="form-puesto-nombre" class="form-control" required placeholder="Ej: Carretillero">
+                    </div>
+                    
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Descripción de las Tareas</label>
+                        <textarea id="form-puesto-descripcion" class="form-control" rows="3" placeholder="Breve descripción de las labores a realizar..."></textarea>
+                    </div>
+                    
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Riesgos Asociados (Generales)</label>
+                        <textarea id="form-puesto-riesgos" class="form-control" rows="3" placeholder="Ej: Caídas al mismo nivel, atropellos, ruido..."></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-puesto" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-puesto" class="btn btn--primary">Guardar Puesto</button>
+        </div>
+
+    </div>
+</div>

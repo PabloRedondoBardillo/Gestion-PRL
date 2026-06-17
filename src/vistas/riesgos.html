@@ -1,0 +1,100 @@
+<div class="view-header">
+    <p>Evaluación y gestión de riesgos laborales asociados a los puestos de trabajo.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-riesgo" class="btn btn--primary">+ Evaluar Riesgo</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="10%">Código</th>
+                <th width="15%">Puesto</th>
+                <th width="15%">Tipo de Riesgo</th>
+                <th width="8%">Prob.</th>
+                <th width="8%">Sev.</th>
+                <th width="12%">Nivel</th>
+                <th width="12%">Estado</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-riesgos"> 
+            </tbody>
+    </table>
+</div>
+
+<div id="modal-nuevo-riesgo" class="modal">
+    <div class="modal__content">
+        
+        <div class="modal__header">
+            <h2>Evaluación de Riesgo</h2>
+            <button id="btn-cerrar-modal-riesgo" class="btn--icon">&times;</button>
+        </div>
+        
+        <div class="modal__body">
+            <form id="form-riesgo">
+                <input type="hidden" id="form-riesgo-id">
+                <div class="form-grid">
+                    
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Puesto de Trabajo Afectado *</label>
+                        <select id="form-riesgo-puesto" class="form-control" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Código del Riesgo *</label>
+                        <input type="text" id="form-riesgo-codigo" class="form-control" required placeholder="Ej: RSG-001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Riesgo *</label>
+                        <select id="form-riesgo-tipo" class="form-control" required>
+                            <option value="Físico">Físico</option>
+                            <option value="Químico">Químico</option>
+                            <option value="Biológico">Biológico</option>
+                            <option value="Ergonómico">Ergonómico</option>
+                            <option value="Psicosocial">Psicosocial</option>
+                            <option value="Seguridad">Seguridad</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Descripción del Riesgo</label>
+                        <textarea id="form-riesgo-descripcion" class="form-control" rows="2" placeholder="Detalla el riesgo..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Probabilidad (1-5)</label>
+                        <input type="number" id="form-riesgo-probabilidad" class="form-control" min="1" max="5" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Severidad (1-5)</label>
+                        <input type="number" id="form-riesgo-severidad" class="form-control" min="1" max="5" value="1">
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Medidas Preventivas</label>
+                        <textarea id="form-riesgo-medidas" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Estado</label>
+                        <select id="form-riesgo-estado" class="form-control">
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en proceso">En proceso</option>
+                            <option value="controlado">Controlado</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-riesgo" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-riesgo" class="btn btn--primary">Guardar Riesgo</button>
+        </div>
+
+    </div>
+</div>

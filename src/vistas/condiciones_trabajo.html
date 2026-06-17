@@ -1,0 +1,91 @@
+<div class="view-header">
+    <p>Planificación, registro y seguimiento de inspecciones de seguridad en las instalaciones.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nueva-inspeccion" class="btn btn--primary">+ Nueva Inspección</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Tipo</th>
+                <th width="15%">Sección</th>
+                <th width="20%">Ubicación Exacta</th>
+                <th width="12%">Fecha</th>
+                <th width="13%">Estado</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-inspecciones"></tbody>
+    </table>
+</div>
+
+<div id="modal-inspeccion" class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <h2>Informe de Inspección de Seguridad</h2>
+            <button id="btn-cerrar-inspeccion" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-inspeccion">
+                <input type="hidden" id="form-insp-id">
+                <div class="form-grid">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Inspección *</label>
+                        <select id="form-insp-tipo" class="form-control" required>
+                            <option value="Ordinaria">Ordinaria Periódica</option>
+                            <option value="Extraordinaria">Extraordinaria</option>
+                            <option value="Seguimiento">De Seguimiento</option>
+                            <option value="Reglamentaria">Auditoría / Reglamentaria</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Inspección *</label>
+                        <input type="date" id="form-insp-fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Sección Afectada</label>
+                        <select id="form-insp-seccion" class="form-control"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ubicación Exacta *</label>
+                        <input type="text" id="form-insp-ubicacion" class="form-control" required placeholder="Ej: Pasillo Central - Línea de envasado 3">
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Responsable / Inspector</label>
+                        <select id="form-insp-responsable" class="form-control"></select>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Resultado / Deficiencias Detectadas *</label>
+                        <textarea id="form-insp-resultado" class="form-control" rows="3" required placeholder="Describe el estado de las condiciones de trabajo..."></textarea>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Medidas Correctivas Propuestas</label>
+                        <textarea id="form-insp-medidas" class="form-control" rows="2" placeholder="Acciones para subsanar las deficiencias..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Estado de las Medidas</label>
+                        <select id="form-insp-estado" class="form-control">
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en proceso">En proceso</option>
+                            <option value="subsanado">Subsanado</option>
+                        </select>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-inspeccion" class="btn btn--primary">Guardar Inspección</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="view-header">
+    <p>Base de datos global de personas registradas en el sistema.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nueva-persona" class="btn btn--primary">+ Nueva Persona</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">DNI/NIE</th>
+                <th width="25%">Nombre Completo</th>
+                <th width="15%">Teléfono</th>
+                <th width="20%">Email</th>
+                <th width="25%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-personas"></tbody>
+    </table>
+</div>
+
+<div id="modal-nueva-persona" class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <h2>Ficha de Persona</h2>
+            <button id="btn-cerrar-modal-persona" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-persona">
+                <input type="hidden" id="form-persona-id">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">DNI / NIE *</label>
+                        <input type="text" id="form-persona-dni" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo *</label>
+                        <input type="text" id="form-persona-nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" id="form-persona-fecha" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono</label>
+                        <input type="text" id="form-persona-telefono" class="form-control">
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="form-persona-email" class="form-control">
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" id="form-persona-direccion" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-persona" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-persona" class="btn btn--primary">Guardar Persona</button>
+        </div>
+    </div>
+</div>

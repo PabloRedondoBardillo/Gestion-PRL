@@ -1,0 +1,88 @@
+<div class="view-header">
+    <p>Registro e investigación de accidentes, incidentes y enfermedades profesionales.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nueva-investigacion" class="btn btn--primary">+ Registrar Investigación</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Código</th>
+                <th width="25%">Trabajador Afectado</th>
+                <th width="15%">Tipo de Daño</th>
+                <th width="15%">Fecha</th>
+                <th width="15%">Estado</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-investigaciones"></tbody>
+    </table>
+</div>
+
+<div id="modal-investigacion" class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <h2>Ficha de Investigación</h2>
+            <button id="btn-cerrar-investigacion" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-investigacion">
+                <input type="hidden" id="form-inv-id">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Código del Informe *</label>
+                        <input type="text" id="form-inv-codigo" class="form-control" required placeholder="Ej: INV-2026-001">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha del Suceso *</label>
+                        <input type="date" id="form-inv-fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Trabajador Implicado *</label>
+                        <select id="form-inv-trabajador" class="form-control" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Suceso *</label>
+                        <select id="form-inv-tipo" class="form-control" required>
+                            <option value="Incidente">Incidente (Sin lesiones)</option>
+                            <option value="Accidente sin baja">Accidente sin baja médica</option>
+                            <option value="Accidente con baja">Accidente con baja médica</option>
+                            <option value="Enfermedad Profesional">Enfermedad Profesional</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Estado de la Investigación</label>
+                        <select id="form-inv-estado" class="form-control">
+                            <option value="pendiente">Pendiente de iniciar</option>
+                            <option value="en proceso">En proceso</option>
+                            <option value="cerrada">Cerrada</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Descripción de los Hechos</label>
+                        <textarea id="form-inv-descripcion" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Análisis de Causas</label>
+                        <textarea id="form-inv-causas" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Medidas Correctivas / Preventivas propuestas</label>
+                        <textarea id="form-inv-medidas" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-investigacion" class="btn btn--primary">Guardar Informe</button>
+        </div>
+    </div>
+</div>

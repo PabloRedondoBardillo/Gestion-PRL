@@ -1,0 +1,69 @@
+<div class="view-header">
+    <p>Redacción y seguimiento de los planes de prevención para los riesgos evaluados.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-plan" class="btn btn--primary">+ Nuevo Plan</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Código Plan</th>
+                <th width="20%">Riesgo Asociado</th>
+                <th width="15%">Fecha Creación</th>
+                <th width="10%">Versión</th>
+                <th width="20%">Contenido Resumido</th>
+                <th width="20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-planes"> 
+            </tbody>
+    </table>
+</div>
+
+<div id="modal-nuevo-plan" class="modal">
+    <div class="modal__content">
+        
+        <div class="modal__header">
+            <h2>Detalle del Plan de Prevención</h2>
+            <button id="btn-cerrar-modal-plan" class="btn--icon">&times;</button>
+        </div>
+        
+        <div class="modal__body">
+            <form id="form-plan">
+                <input type="hidden" id="form-plan-id">
+                <div class="form-grid">
+                    
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Riesgo Asociado *</label>
+                        <select id="form-plan-riesgo" class="form-control" required></select>
+                        <small style="color: #666; margin-top: 5px; display: block;">Solo aparecen riesgos previamente evaluados en el sistema.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Código del Plan *</label>
+                        <input type="text" id="form-plan-codigo" class="form-control" required placeholder="Ej: PL-RSG-001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Versión Documento</label>
+                        <input type="text" id="form-plan-version" class="form-control" placeholder="1.0" value="1.0">
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Contenido / Protocolo a seguir *</label>
+                        <textarea id="form-plan-contenido" class="form-control" rows="6" required placeholder="Describe las pautas operativas del plan de prevención..."></textarea>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        
+        <div class="modal__footer">
+            <button type="button" id="btn-cancelar-plan" class="btn btn--secondary">Cancelar</button>
+            <button type="submit" form="form-plan" class="btn btn--primary">Guardar Documento</button>
+        </div>
+
+    </div>
+</div>

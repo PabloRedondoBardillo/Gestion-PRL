@@ -1,0 +1,89 @@
+<div class="view-header">
+    <p>Registro de simulacros de emergencia, evacuación y control de asistentes.</p>
+    <div style="display: flex; gap: 10px;">
+        <button id="btn-nuevo-simulacro" class="btn btn--primary">+ Registrar Simulacro</button>
+    </div>
+</div>
+
+<div class="data-table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th width="15%">Tipo</th>
+                <th width="10%">Fecha</th>
+                <th width="20%">Descripción</th>
+                <th width="15%">Responsable</th>
+                <th width="25%">Participantes</th>
+                <th width="15%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-simulacros"></tbody>
+    </table>
+</div>
+
+<div id="modal-simulacro" class="modal">
+    <div class="modal__content">
+        <div class="modal__header">
+            <h2>Ficha de Simulacro</h2>
+            <button id="btn-cerrar-simulacro" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-simulacro">
+                <input type="hidden" id="form-sim-id">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Emergencia *</label>
+                        <select id="form-sim-tipo" class="form-control" required>
+                            <option value="Incendio">Incendio</option>
+                            <option value="Evacuación Médica">Evacuación Médica</option>
+                            <option value="Derrame Químico">Derrame Químico</option>
+                            <option value="Riesgo Eléctrico">Riesgo Eléctrico</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha del Simulacro *</label>
+                        <input type="date" id="form-sim-fecha" class="form-control" required>
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Responsable / Coordinador *</label>
+                        <select id="form-sim-responsable" class="form-control" required></select>
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Descripción de los Hechos *</label>
+                        <textarea id="form-sim-descripcion" class="form-control" rows="2" required></textarea>
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label class="form-label">Trabajadores Participantes</label>
+                        <select id="form-sim-participantes" class="form-control" multiple size="5" style="height: auto;"></select>
+                        <small style="color: var(--primary); display: block; margin-top: 5px;">Mantén pulsada la tecla <strong>Ctrl</strong> para seleccionar varios trabajadores a la vez.</small>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-simulacro" class="btn btn--primary">Guardar Simulacro</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-add-participante" class="modal">
+    <div class="modal__content modal__content--small">
+        <div class="modal__header">
+            <h2>Añadir Participante al Simulacro</h2>
+            <button id="btn-cerrar-add-part" class="btn--icon">&times;</button>
+        </div>
+        <div class="modal__body">
+            <form id="form-add-part">
+                <input type="hidden" id="form-add-part-simulacro-id">
+                <div class="form-group">
+                    <label class="form-label">Selecciona el trabajador</label>
+                    <select id="form-add-part-trabajador" class="form-control" required></select>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button type="submit" form="form-add-part" class="btn btn--primary">Añadir Asistente</button>
+        </div>
+    </div>
+</div>
