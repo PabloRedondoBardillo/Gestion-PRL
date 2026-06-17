@@ -19,16 +19,24 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
+    "appId": "gestionprl",
+    "productName": "Gestion PRL",
     "asarUnpack": [
       "**/*.node"
     ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
     "linux": {
       "target": ["AppImage"],
       "category": "Utility",
       "icon": "build/icon.png"
     }
-  },
-  "keywords": [],
-  "license": "ISC",
-  "type": "commonjs"  
+  }
 }

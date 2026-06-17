@@ -57,7 +57,9 @@ body {
     background-color: var(--sidebar-bg); 
     color: var(--sidebar-text); 
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100vh; 
 }
 .sidebar-header { 
     padding: 20px; 
@@ -99,6 +101,7 @@ body {
     display: flex; 
     flex-direction: column; 
     overflow-y: auto;
+    height: 100vh;
 }
 .content-header { 
     padding: 20px 30px; 
