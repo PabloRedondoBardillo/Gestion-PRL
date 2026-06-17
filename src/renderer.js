@@ -2399,13 +2399,6 @@ const ControladoresVista = {
                 tbody: document.getElementById('lista-inspecciones')
             };
 
-            if (!AppState.empresaActivaId) {
-                if(typeof Notificador !== 'undefined') Notificador.mostrar('⚠️ Selecciona una empresa activa para gestionar sus inspecciones.', 'warning');
-                this.DOM.btnNuevo.disabled = true;
-            } else {
-                this.DOM.btnNuevo.disabled = false;
-            }
-
             this.DOM.btnNuevo.addEventListener('click', () => this.abrirModal());
             this.DOM.btnCerrar.addEventListener('click', () => this.cerrarModal());
             this.DOM.form.addEventListener('submit', (e) => this.guardarInspeccion(e));
