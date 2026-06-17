@@ -204,7 +204,7 @@ db.exec(
       FOREIGN KEY(trabajador) references trabajadores(id) ON DELETE CASCADE
   );
 
-  CREATE TABLE IF NOT EXISTS insepcciones (
+  CREATE TABLE IF NOT EXISTS inspecciones (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       empresa INTEGER NOT NULL,
       seccion INTEGER,
@@ -335,6 +335,67 @@ ipcMain.handle('delete-empresa', (event, id) => {
   if (empresaActivaId === id) empresaActivaId = null; 
   
   return info.changes;
+});
+
+//Inicio Handlers
+
+ipcMain.handle('get-estadisticas', () => {
+    if (!empresaActivaId){
+    dispararNotificacion("No hay una empresa seleccionada", "error");
+    return null;
+  }
+
+    const stats = {
+        trabajadores: 0,
+        medico: 0,
+        epis: 0,
+        mantenimientos: 0,
+        inspecciones: 0
+    };
+
+    try {
+        // 1. Total Trabajadores (Activos y no dados de baja)
+        stats.trabajadores = db.prepare(`
+            SELECT COUNT(*) as total FROM trabajadores 
+            WHERE empresa = ? AND fecha_baja IS NULL AND activo = 1
+        `).get(empresaActivaId).total;
+
+        // 2. Riesgos Críticos (Nivel 'Alto')
+        stats.riesgos = db.prepare(`
+            SELECT COUNT(*) as total FROM riesgos_evaluacion r
+            JOIN puestos_trabajo p ON r.puesto_trabajo = p.id
+            JOIN secciones s ON p.seccion = s.id
+            WHERE s.empresa = ? AND r.nivel_riesgo = 'Alto' AND r.activo = 1
+        `).get(empresaActivaId).total;
+
+        // 3. Investigaciones Abiertas (Cualquier estado que no sea 'cerrada')
+        stats.investigaciones = db.prepare(`
+            SELECT COUNT(*) as total FROM investigaciones i
+            JOIN trabajadores t ON i.trabajador = t.id
+            WHERE t.empresa = ? AND i.estado != 'cerrada' AND i.activo = 1
+        `).get(empresaActivaId).total;
+
+        // 4. Formaciones Vencidas (Fecha de validez anterior a hoy)
+        stats.formaciones = db.prepare(`
+            SELECT COUNT(*) as total FROM formacion f
+            JOIN trabajadores t ON f.trabajador = t.id
+            WHERE t.empresa = ? AND f.activo = 1
+            AND f.fecha_validez < date('now')
+        `).get(empresaActivaId).total;
+
+        // 5. EPIs Vencidas (Fecha de caducidad anterior a hoy)
+        stats.epis = db.prepare(`
+            SELECT COUNT(*) as total FROM epis e
+            JOIN trabajadores t ON e.trabajador = t.id
+            WHERE t.empresa = ? AND e.activo = 1
+            AND e.fecha_caducidad < date('now')
+        `).get(empresaActivaId).total;
+
+    } catch (error) {
+        console.error("Error calculando estadísticas:", error);
+    }
+
+    return stats;
 });
 
 //Secciones Handlers
@@ -511,7 +572,7 @@ ipcMain.handle('get-trabajadores-actuales', () => {
     `SELECT DISTINCT P.nombre, P.dni, PT.nombre as puesto_trabajo, T.fecha_alta, T.fecha_baja, T.activo, T.observaciones, T.id 
     FROM trabajadores as T 
     JOIN personas as P ON T.persona = P.id 
-    JOIN puestos_trabajo as PT ON T.puesto_trabajo = PT.id
+    LEFT JOIN puestos_trabajo as PT ON T.puesto_trabajo = PT.id
     WHERE T.empresa = ? AND T.fecha_baja IS NULL`
   );
   return stmt.all(empresaActivaId);
@@ -527,7 +588,7 @@ ipcMain.handle('get-trabajadores-antiguos', () => {
     `SELECT DISTINCT P.nombre, P.dni, PT.nombre as puesto_trabajo, T.fecha_alta, T.fecha_baja, T.activo, T.observaciones, T.id 
     FROM trabajadores as T 
     JOIN personas as P ON T.persona = P.id 
-    JOIN puestos_trabajo as PT ON T.puesto_trabajo = PT.id
+    LEFT JOIN puestos_trabajo as PT ON T.puesto_trabajo = PT.id
     WHERE T.empresa = ? AND T.fecha_baja IS NOT NULL`
   );
   return stmt.all(empresaActivaId);
@@ -952,7 +1013,7 @@ ipcMain.handle('get-epis-actuales', () => {
   return db.prepare(`
       SELECT E.*, te.nombre as epi_nombre, P.nombre as trabajador_nombre, P.dni 
       FROM epis E
-      JOIN tipos_epis TE ON E.tipo = TE.id
+      LEFT JOIN tipos_epis TE ON E.tipo = TE.id
       JOIN trabajadores T ON E.trabajador = T.id
       JOIN personas P ON T.persona = P.id
       WHERE T.empresa = ? AND E.activo = 1
@@ -967,7 +1028,7 @@ ipcMain.handle('get-epis-antiguos', () => {
   return db.prepare(`
       SELECT E.*, te.nombre as epi_nombre, P.nombre as trabajador_nombre, P.dni 
       FROM epis E
-      JOIN tipos_epis TE ON E.tipo = TE.id
+      LEFT JOIN tipos_epis TE ON E.tipo = TE.id
       JOIN trabajadores T ON E.trabajador = T.id
       JOIN personas P ON T.persona = P.id
       WHERE T.empresa = ? AND E.activo = 0
@@ -1124,7 +1185,7 @@ ipcMain.handle('get-mantenimientos-actuales', () => {
       SELECT M.*, E.nombre as equipo_nombre, E.codigo as equipo_codigo, P.nombre as responsable_nombre 
       FROM mantenimientos M
       JOIN equipos E ON M.equipo = E.id
-      LEFT JOIN personas P ON M.responsable = E.id
+      LEFT JOIN personas P ON M.responsable = P.id
       WHERE E.empresa = ? AND M.activo = 1
   `).all(empresaActivaId);
 });
@@ -1138,7 +1199,7 @@ ipcMain.handle('get-mantenimientos-antiguos', () => {
       SELECT M.*, E.nombre as equipo_nombre, E.codigo as equipo_codigo, P.nombre as responsable_nombre 
       FROM mantenimientos M
       JOIN equipos E ON M.equipo = E.id
-      LEFT JOIN personas P ON M.responsable = E.id
+      LEFT JOIN personas P ON M.responsable = P.id
       WHERE E.empresa = ? AND M.activo = 0
   `).all(empresaActivaId);
 });
@@ -1304,7 +1365,7 @@ ipcMain.handle('get-inspecciones-actuales', () => {
   }
   return db.prepare(`
       SELECT I.*, S.nombre as seccion_nombre, P.nombre as responsable_nombre 
-      FROM insepcciones I
+      FROM inspecciones I
       LEFT JOIN secciones S ON I.seccion = S.id
       LEFT JOIN personas P ON I.responsable = P.id
       WHERE I.empresa = ? AND I.activo = 1
@@ -1318,7 +1379,7 @@ ipcMain.handle('get-inspecciones-antiguos', () => {
   }
   return db.prepare(`
       SELECT I.*, S.nombre as seccion_nombre, P.nombre as responsable_nombre 
-      FROM insepcciones I
+      FROM inspecciones I
       LEFT JOIN secciones S ON I.seccion = S.id
       LEFT JOIN personas P ON I.responsable = P.id
       WHERE I.empresa = ? AND I.activo = 0
@@ -1331,7 +1392,7 @@ ipcMain.handle('add-inspeccion', (event, insp) => {
     return false;
   }
   const stmt = db.prepare(`
-      INSERT INTO insepcciones (empresa, seccion, ubicacion_exacta, tipo_inspeccion, fecha, resultado, medidas_correctivas, responsable, estado) 
+      INSERT INTO inspecciones (empresa, seccion, ubicacion_exacta, tipo_inspeccion, fecha, resultado, medidas_correctivas, responsable, estado) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   const info = stmt.run(empresaActivaId, insp.seccion, insp.ubicacion_exacta, insp.tipo_inspeccion, insp.fecha, insp.resultado, insp.medidas_correctivas, insp.responsable, insp.estado);
@@ -1344,7 +1405,7 @@ ipcMain.handle('update-inspeccion', (event, insp) => {
     return false;
   }
   const stmt = db.prepare(`
-      UPDATE insepcciones 
+      UPDATE inspecciones 
       SET seccion=?, ubicacion_exacta=?, tipo_inspeccion=?, fecha=?, resultado=?, medidas_correctivas=?, responsable=?, estado=? 
       WHERE id=? AND empresa=?
   `);
@@ -1357,7 +1418,7 @@ ipcMain.handle('delete-inspeccion', (event, id) => {
     dispararNotificacion("No hay una empresa seleccionada", "error");
     return false;
   }
-  return db.prepare('UPDATE insepcciones SET activo = 0 WHERE id = ? AND empresa = ?').run(id, empresaActivaId).changes;
+  return db.prepare('UPDATE inspecciones SET activo = 0 WHERE id = ? AND empresa = ?').run(id, empresaActivaId).changes;
 });
 
 //Participaciones Handlers

@@ -193,7 +193,9 @@ const ControladoresVista = {
                 modal: document.getElementById('modal-editar-empresa'),
                 btnCerrar: document.getElementById('btn-cerrar-editar-empresa'),
                 btnCancelar: document.getElementById('btn-cancelar-editar-empresa'),
-                form: document.getElementById('form-editar-empresa')
+                form: document.getElementById('form-editar-empresa'),
+                panelStats: document.getElementById('panel-estadisticas'),
+                mensajeVacio: document.getElementById('mensaje-no-empresa')
             };
 
             // Eventos
@@ -204,6 +206,7 @@ const ControladoresVista = {
             if(this.DOM.btnEliminar) this.DOM.btnEliminar.addEventListener('click', () => this.eliminarEmpresa());
 
             this.comprobarEstadoBotones();
+            this.cargarEstadisticas();
         },
 
         comprobarEstadoBotones() {
@@ -211,6 +214,25 @@ const ControladoresVista = {
             const hayEmpresa = AppState.empresaActivaId !== null;
             if (this.DOM.btnEditar) this.DOM.btnEditar.disabled = !hayEmpresa;
             if (this.DOM.btnEliminar) this.DOM.btnEliminar.disabled = !hayEmpresa;
+        },
+
+        async cargarEstadisticas() {
+            if (!AppState.empresaActivaId) return;
+
+            try {
+                // LLamada al puente usando exactamente el nombre expuesto en preload.js
+                const stats = await window.apiPRL.getEstadisticas(); 
+                
+                if (stats) {
+                    document.getElementById('stat-trabajadores').textContent = stats.trabajadores;
+                    document.getElementById('stat-riesgos').textContent = stats.riesgos;
+                    document.getElementById('stat-investigaciones').textContent = stats.investigaciones;
+                    document.getElementById('stat-formaciones').textContent = stats.formaciones;
+                    document.getElementById('stat-epis').textContent = stats.epis;
+                }
+            } catch (error) {
+                console.error("Error al cargar el dashboard:", error);
+            }
         },
 
         async abrirModal() {

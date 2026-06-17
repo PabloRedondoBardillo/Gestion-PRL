@@ -7,7 +7,7 @@ contextBridge.exposeInMainWorld('apiPRL', {
   updateEmpresa: (datos) => ipcRenderer.invoke('update-empresa', datos),
   deleteEmpresa: (id) => ipcRenderer.invoke('delete-empresa', id),
   
-  getEstadisiticas: () => ipcRenderer.invoke('get-estadisticas'),
+  getEstadisticas: () => ipcRenderer.invoke('get-estadisticas'),
 
   getSeccionesActuales: () => ipcRenderer.invoke('get-secciones-actuales'),
   getSeccionesAntiguos: () => ipcRenderer.invoke('get-secciones-antiguos'),
