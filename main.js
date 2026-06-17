@@ -273,7 +273,9 @@ function createWindow(){
       preload:path.join(__dirname, 'preload.js'),
       nodeIntegration:false,
       contextIsolation:true,
-      devTools:false
+      devTools:false,
+      webSecurity:true,
+      contextIsolation:true
     }
   })
   win.loadFile('src/index.html');
