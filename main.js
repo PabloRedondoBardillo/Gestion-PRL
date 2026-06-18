@@ -2,7 +2,19 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const Database = require('better-sqlite3');
 
-const db = new Database('gestion_prl.db');
+let dbPath;
+
+if (app.isPackaged) {
+    if (process.env.APPIMAGE) {
+        dbPath = path.join(path.dirname(process.env.APPIMAGE), 'gestion_prl.db');
+    } else {
+        dbPath = path.join(process.env.PORTABLE_EXECUTABLE_DIR, 'gestion_prl.db');
+    }
+} else {
+    dbPath = path.join(app.getAppPath(), 'gestion_prl.db');
+}
+
+const db = new Database(dbPath);
 
 const appState = {empresaId: null};
 
