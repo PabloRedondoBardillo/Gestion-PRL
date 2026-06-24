@@ -1,6 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('apiPRL', {
+  iniciarSesion: (password) => ipcRenderer.invoke('iniciar-sesion', password),
+  
   getEmpresas: () => ipcRenderer.invoke('get-empresas'),
   addEmpresa: (datos) => ipcRenderer.invoke('add-empresa', datos),
   setEmpresaActiva: (id) => ipcRenderer.invoke('set-empresa-activa', id),

@@ -104,6 +104,17 @@
 
     <div id="toast-container" class="toast-container"></div>
 
+    <div id="pantalla-bloqueo" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-color); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 400px; text-align: center;">
+            <h2 style="margin-top: 0;">🛡️ Gestión PRL</h2>
+            <p style="color: #666; margin-bottom: 20px;">Si es la primera vez, la contraseña que introduzcas cifrará la base de datos para siempre.</p>
+            <form id="form-login">
+                <input type="password" id="input-password" required placeholder="Contraseña maestra" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Desbloquear</button>
+            </form>
+        </div>
+    </div>
+
     <script src="renderer.js"></script>
 </body>
 </html>

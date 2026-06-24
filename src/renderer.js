@@ -2094,10 +2094,28 @@ const Notificador = {
 };
 
 // ==========================================
-// 6. ARRANQUE
+// 6. ARRANQUE Y LOGIN
 // ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-  GestorEmpresas.init();
-  Navegacion.init();
-  Notificador.init();
+document.addEventListener('DOMContentLoaded', () => {
+  Notificador.init();  
+  document.getElementById('form-login').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pwd = document.getElementById('input-password').value;
+        const btn = e.target.querySelector('button');
+        
+        btn.textContent = 'Desbloqueando...';
+        btn.disabled = true;
+
+        const resultado = await window.apiPRL.iniciarSesion(pwd);
+
+        if (resultado) {
+            document.getElementById('pantalla-bloqueo').remove();
+            
+            GestorEmpresas.init(); 
+            Navegacion.init(); 
+        } else {
+            btn.textContent = 'Desbloquear';
+            btn.disabled = false;
+        }
+    });
 });
