@@ -48,8 +48,14 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-
-
+session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+        responseHeaders: {
+            ...details.responseHeaders,
+            'Content-Security-Policy': ["default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:;"]
+        }
+    });
+});
 
 ipcMain.handle('iniciar-sesion', async (event, password) => {
     try {
