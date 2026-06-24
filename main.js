@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, session} = require('electron');
 const path = require('path');
 const Database = require('better-sqlite3-multiple-ciphers');
 
@@ -47,6 +47,7 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+
 
 
 
